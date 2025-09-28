@@ -1,5 +1,5 @@
 # 构建阶段 - 使用 Yarn
-FROM registry.cn-shenzhen.aliyuncs.com/zhuyifan/node:18.20.4 AS builder
+FROM node:18.20.0-alpine3.19 AS builder
 
 # 安装 Yarn
 RUN apk add --no-cache yarn
