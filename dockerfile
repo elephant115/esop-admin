@@ -31,6 +31,12 @@ COPY --from=builder --chown=appuser:appgroup /app/dist /usr/share/nginx/html
 # 复制自定义 Nginx 配置
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# 在 Dockerfile 中添加以下配置
+RUN echo "pid /tmp/nginx.pid;" > /etc/nginx/nginx.conf && \
+    echo "user nginx;" >> /etc/nginx/nginx.conf && \
+    echo "events { worker_connections 1024; }" >> /etc/nginx/nginx.conf && \
+    echo "http { include /etc/nginx/conf.d/*.conf; }" >> /etc/nginx/nginx.conf
+
 # 移除默认的 Nginx 配置
 RUN rm /etc/nginx/conf.d/default.conf
 
