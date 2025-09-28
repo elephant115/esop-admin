@@ -32,7 +32,7 @@ COPY --from=builder --chown=appuser:appgroup /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 自定义nginx主配置（移除user指令）
-RUN echo "pid /tmp/nginx/nginx.pid;" > /etc/nginx/nginx.conf && \
+RUN echo "pid /tmp/nginx.pid;" > /etc/nginx/nginx.conf && \
     echo "worker_processes auto;" >> /etc/nginx/nginx.conf && \
     echo "error_log /var/log/nginx/error.log warn;" >> /etc/nginx/nginx.conf && \
     echo "events { worker_connections 1024; }" >> /etc/nginx/nginx.conf && \
