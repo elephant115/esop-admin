@@ -28,11 +28,6 @@ RUN addgroup -g 1001 -S appgroup && \
 # 复制构建产物到 Nginx 目录
 COPY --from=builder --chown=appuser:appgroup /app/dist /usr/share/nginx/html
 
-# 修改 Nginx 配置（追加方式，不覆盖）
-RUN echo "pid /tmp/nginx/nginx.pid;" >> /etc/nginx/nginx.conf && \
-    # 移除默认配置（在切换用户前执行）
-    rm -f /etc/nginx/conf.d/default.conf
-
 # 复制自定义 Nginx 配置（确保监听 8080 端口）
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
