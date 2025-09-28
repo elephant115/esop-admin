@@ -8,7 +8,7 @@ WORKDIR /app
 
 # 复制 package 文件并安装依赖
 COPY package*.json ./
-COPY yarn.lock ./
+# COPY yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 # 复制源代码并构建
