@@ -28,9 +28,6 @@ RUN addgroup -g 1001 -S appgroup && \
 # 复制构建产物到 Nginx 目录
 COPY --from=builder --chown=appuser:appgroup /app/dist /usr/share/nginx/html
 
-# 复制自定义 Nginx 配置
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 # 自定义nginx主配置（移除user指令）
 RUN echo "pid /tmp/nginx.pid;" > /etc/nginx/nginx.conf && \
     echo "worker_processes auto;" >> /etc/nginx/nginx.conf && \
@@ -39,6 +36,10 @@ RUN echo "pid /tmp/nginx.pid;" > /etc/nginx/nginx.conf && \
     echo "http { include /etc/nginx/conf.d/*.conf; }" >> /etc/nginx/nginx.conf
 # 移除默认的 Nginx 配置
 RUN rm /etc/nginx/conf.d/default.conf
+
+
+# 复制自定义 Nginx 配置
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 切换到非 root 用户
 USER appuser
