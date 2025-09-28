@@ -1,5 +1,5 @@
 # 构建阶段 - 使用 Yarn
-FROM node:18.20.0-alpine3.19 AS builder
+FROM registry.cn-shenzhen.aliyuncs.com/zhuyifan/node:18.20.4 AS builder
 
 # 安装 Yarn
 RUN apk add --no-cache yarn
@@ -16,7 +16,7 @@ COPY . .
 RUN yarn build
 
 # 生产阶段 - 使用 Nginx
-FROM nginx:1.25.3-alpine
+FROM registry.cn-shenzhen.aliyuncs.com/zhuyifan/nginx:v1
 
 # 创建临时目录并设置权限（使用默认的 nginx 用户）
 RUN mkdir -p /tmp/nginx && \
