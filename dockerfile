@@ -30,9 +30,6 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 
-# 复制自定义 Nginx 配置
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 # 设置权限（nginx 用户默认已经存在）
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chmod -R 755 /usr/share/nginx/html
