@@ -16,7 +16,7 @@ COPY . .
 RUN yarn build
 
 # 生产阶段 - 使用 Nginx
-FROM registry.cn-shenzhen.aliyuncs.com/zhuyifan/nginx:v1
+FROM nginx:1.25.3-alpine
 
 # 创建临时目录并设置权限（使用默认的 nginx 用户）
 RUN mkdir -p /tmp/nginx && \
